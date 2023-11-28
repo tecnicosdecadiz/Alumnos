@@ -1,0 +1,52 @@
+import { useState } from 'react';
+import EditAlumn from './EditAlumn';
+import DeleteAlumn from './DeleteAlumn';
+import RealizedBar from './RealizedBar';
+
+export default function AlumnTable(props) {
+  const { alumns, onAddAlumns } = props;
+  return (
+    <table className="table mt-5">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Edad</th>
+          <th scope="col">Curso</th>
+          <th scope="col">Fecha de inscripción</th>
+          <th scope="col">Nota Media</th>
+          <th scope="col">% Realizado</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {alumns?.map((alumn, i) => (
+          <tr key={i}>
+            <td>{alumn.name}</td>
+            <td>{alumn.surname}</td>
+            <td>{alumn.age}</td>
+            <td>{alumn.course}</td>
+            <td>{alumn.date}</td>
+            <td>{alumn.note}</td>
+            <td>
+              <RealizedBar realized={alumn.realized} /> 
+            </td>
+            <td className="d-inline-flex pointer">
+              <EditAlumn
+                index={i}
+                alumns={alumns}
+                alumn={alumn}
+                onAddAlumns={(v) => onAddAlumns(v)}
+              />
+              <DeleteAlumn
+                index={i}
+                alumns={alumns}
+                onAddAlumns={(v) => onAddAlumns(v)}
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}

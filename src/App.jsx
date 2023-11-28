@@ -1,5 +1,11 @@
+import Home from './templates/Home';
+
 function App() {
-  return <div>HolaMundo</div>;
+  return (
+    <>
+      <Home />
+    </>
+  );
 }
 
 export default App;
