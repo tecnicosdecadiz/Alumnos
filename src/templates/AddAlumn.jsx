@@ -133,9 +133,9 @@ export default function AddAlumn(props) {
                           setFieldValue('course', v.target.value)
                         }
                       >
-                        <option value="red">Red</option>
-                        <option value="green">Green</option>
-                        <option value="blue">Blue</option>
+                        <option value="1942">1942</option>
+                        <option value="1943">1943</option>
+                        <option value="1944">1944</option>
                       </Field>
                     </div>
 

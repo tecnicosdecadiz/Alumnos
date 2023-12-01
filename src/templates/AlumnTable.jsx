@@ -5,6 +5,12 @@ import RealizedBar from './RealizedBar';
 
 export default function AlumnTable(props) {
   const { alumns, onAddAlumns } = props;
+
+  function convertDate(date) {
+    const arrayDate = date.split('-');
+    return `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`;
+  }
+
   return (
     <table className="table mt-5">
       <thead>
@@ -26,10 +32,10 @@ export default function AlumnTable(props) {
             <td>{alumn.surname}</td>
             <td>{alumn.age}</td>
             <td>{alumn.course}</td>
-            <td>{alumn.date}</td>
+            <td>{convertDate(alumn.date)}</td>
             <td>{alumn.note}</td>
-            <td>
-              <RealizedBar realized={alumn.realized} /> 
+            <td>{console.log(alumn.realized)}
+              <RealizedBar realized={alumn.realized} />
             </td>
             <td className="d-inline-flex pointer">
               <EditAlumn

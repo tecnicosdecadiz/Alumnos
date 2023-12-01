@@ -1,10 +1,11 @@
 import { Field, Form, Formik } from 'formik';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import * as Yup from 'yup';
 import ErrorMessage from './ErrorMessage';
 
 export default function EditAlumn(props) {
   const { index, alumn, alumns, onAddAlumns } = props;
+  const modalRef = useRef(null);
   const [validationSchema] = useState(
     Yup.object().shape({
       name: Yup.string().required('El campo no puede estar vacío'),
@@ -23,6 +24,10 @@ export default function EditAlumn(props) {
   );
 
   const editAlumn = (values) => {
+    let myModal = new bootstrap.Modal(`#exampleModal${index}`, {});
+    console.log('entra', myModal);
+    myModal.hide();
+    console.log('entra', myModal);
     let tempAlumns = [...alumns];
 
     tempAlumns[index].name = values.name;
@@ -33,8 +38,6 @@ export default function EditAlumn(props) {
     tempAlumns[index].note = values.note;
     tempAlumns[index].realized = values.realized;
 
-    console.log('tempAlumns', tempAlumns);
-    console.log('values', values);
     localStorage.setItem('alumns', JSON.stringify(tempAlumns));
     onAddAlumns(tempAlumns);
   };
@@ -141,9 +144,9 @@ export default function EditAlumn(props) {
                           setFieldValue('course', v.target.value)
                         }
                       >
-                        <option value="red">Red</option>
-                        <option value="green">Green</option>
-                        <option value="blue">Blue</option>
+                        <option value="1942">1942</option>
+                        <option value="1943">1943</option>
+                        <option value="1944">1944</option>
                       </Field>
                     </div>
                     <div className="mb-3">
