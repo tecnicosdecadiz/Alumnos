@@ -1,6 +1,5 @@
 export default function RealizedBar(props) {
     const {realized} = props;
-    console.log(realized);
 
     return (
       <div

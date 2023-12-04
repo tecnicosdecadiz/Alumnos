@@ -34,7 +34,7 @@ export default function AlumnTable(props) {
             <td>{alumn.course}</td>
             <td>{convertDate(alumn.date)}</td>
             <td>{alumn.note}</td>
-            <td>{console.log(alumn.realized)}
+            <td>
               <RealizedBar realized={alumn.realized} />
             </td>
             <td className="d-inline-flex pointer">
