@@ -38,7 +38,7 @@ export default function AddAlumn(props) {
   );
 
   const addAlumn = (values) => {
-    let tempAlumns = [...alumns, values];
+    let tempAlumns = [...alumns, values] || [values];
     localStorage.setItem('alumns', JSON.stringify(tempAlumns));
     onAddAlumns(tempAlumns);
   };
