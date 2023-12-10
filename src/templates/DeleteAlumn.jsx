@@ -1,10 +1,5 @@
-import { Field, Form, Formik } from 'formik';
-import { useState } from 'react';
-import * as Yup from 'yup';
-import ErrorMessage from './ErrorMessage';
-
 export default function DeleteAlumn(props) {
-  const { index, alumns, onAddAlumns } = props;
+  const { index, alumns, onUpdateAlumns } = props;
 
   const handleDeleteAlumn = () => {
     let tempAlumns = [...alumns];
@@ -12,7 +7,7 @@ export default function DeleteAlumn(props) {
     tempAlumns.splice(index, 1);
 
     localStorage.setItem('alumns', JSON.stringify(tempAlumns));
-    onAddAlumns(tempAlumns);
+    onUpdateAlumns();
   };
 
   return (

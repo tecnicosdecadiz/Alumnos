@@ -4,8 +4,7 @@ import * as Yup from 'yup';
 import ErrorMessage from './ErrorMessage';
 
 export default function EditAlumn(props) {
-  const { index, alumn, alumns, onAddAlumns } = props;
-  const modalRef = useRef(null);
+  const { index, alumn, alumns, onUpdateAlumns } = props;
   const [validationSchema] = useState(
     Yup.object().shape({
       name: Yup.string()
@@ -39,20 +38,13 @@ export default function EditAlumn(props) {
   );
 
   const editAlumn = (values) => {
-    let myModal = new bootstrap.Modal(`#exampleModal${index}`, {});
-    myModal.hide();
+    // let myModal = new bootstrap.Modal(`#exampleModal${index}`, {});
+    // myModal.hide();
     let tempAlumns = [...alumns];
-
-    tempAlumns[index].name = values.name;
-    tempAlumns[index].surname = values.surname;
-    tempAlumns[index].age = values.age;
-    tempAlumns[index].course = values.course;
-    tempAlumns[index].date = values.date;
-    tempAlumns[index].note = values.note;
-    tempAlumns[index].realized = values.realized;
+    tempAlumns[index] = values;
 
     localStorage.setItem('alumns', JSON.stringify(tempAlumns));
-    onAddAlumns(tempAlumns);
+    onUpdateAlumns();
   };
 
   return (
@@ -79,7 +71,6 @@ export default function EditAlumn(props) {
         validateOnBlur={false}
         enableReinitialize
         onSubmit={(values) => {
-          // editAlumn(key, alumn, values);
           editAlumn(values);
         }}
       >
@@ -88,9 +79,6 @@ export default function EditAlumn(props) {
             <div
               className="modal fade"
               id={`exampleModal${index}`}
-              // tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
             >
               <div className="modal-dialog modal-xl">
                 <div className="modal-content">
@@ -143,7 +131,7 @@ export default function EditAlumn(props) {
                       <Field
                         type="date"
                         name="date"
-                        dateFormat="dd/MM/yyyy"
+                        // dateFormat="dd/MM/yyyy"
                         className="form-control"
                         onChange={(v) => setFieldValue('date', v.target.value)}
                       />

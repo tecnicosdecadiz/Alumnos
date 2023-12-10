@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import ErrorMessage from './ErrorMessage';
 
 export default function AddAlumn(props) {
-  const { alumns, onAddAlumns } = props;
+  const { alumns, onUpdateAlumns } = props;
   const [validationSchema] = useState(
     Yup.object().shape({
       name: Yup.string()
@@ -37,10 +37,11 @@ export default function AddAlumn(props) {
     })
   );
 
-  const addAlumn = (values) => {
+  const addAlumn = (values, { resetForm }) => {
     let tempAlumns = [...alumns, values] || [values];
     localStorage.setItem('alumns', JSON.stringify(tempAlumns));
-    onAddAlumns(tempAlumns);
+    onUpdateAlumns();
+    resetForm();
   };
 
   return (
@@ -49,41 +50,37 @@ export default function AddAlumn(props) {
         type="button"
         className="btn btn-primary"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
+        data-bs-target="#addAlumn"
       >
         Añadir Alumno
       </button>
 
       <Formik
         initialValues={{
-          name: 'aaa',
-          surname: 'aaa',
-          age: '22',
+          name: '',
+          surname: '',
+          age: '',
           course: '1942',
-          note: '2',
+          note: '',
           date: '',
-          realized: '2',
+          realized: '',
         }}
         validationSchema={validationSchema}
         validateOnChange={false}
         validateOnBlur={false}
         enableReinitialize
-        onSubmit={(values) => addAlumn(values)}
+        onSubmit={(values, { resetForm }) => addAlumn(values, { resetForm })}
       >
         {({ setFieldValue, handleSubmit, errors }) => (
           <Form onSubmit={handleSubmit}>
             <div
               className="modal fade"
-              // className={`modal fade ${showAddModal ? 'show' : ''}`}
-              id="exampleModal"
-              // tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
+              id="addAlumn"
             >
               <div className="modal-dialog modal-xl">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">
+                    <h5 className="modal-title">
                       Añadir nuevo alumno
                     </h5>
                     <button
@@ -131,7 +128,7 @@ export default function AddAlumn(props) {
                       <Field
                         type="date"
                         name="date"
-                        dateFormat="dd/MM/yyyy"
+                        // dateFormat="dd/MM/yyyy"
                         className="form-control"
                         onChange={(v) => setFieldValue('date', v.target.value)}
                       />
@@ -147,7 +144,7 @@ export default function AddAlumn(props) {
                           setFieldValue('course', v.target.value)
                         }
                       >
-                        <option value="1942">1942</option>
+                        <option value="1942" selected>1942</option>
                         <option value="1943">1943</option>
                         <option value="1944">1944</option>
                       </Field>

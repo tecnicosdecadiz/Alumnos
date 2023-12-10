@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import EditAlumn from './EditAlumn';
 import DeleteAlumn from './DeleteAlumn';
 import RealizedBar from './RealizedBar';
 
 export default function AlumnTable(props) {
-  const { alumns, onAddAlumns } = props;
+  const { alumns, onUpdateAlumns } = props;
 
   function convertDate(date) {
     const arrayDate = date.split('-');
@@ -42,12 +41,12 @@ export default function AlumnTable(props) {
                 index={i}
                 alumns={alumns}
                 alumn={alumn}
-                onAddAlumns={(v) => onAddAlumns(v)}
+                onUpdateAlumns={(v) => onUpdateAlumns(v)}
               />
               <DeleteAlumn
                 index={i}
                 alumns={alumns}
-                onAddAlumns={(v) => onAddAlumns(v)}
+                onUpdateAlumns={(v) => onUpdateAlumns(v)}
               />
             </td>
           </tr>
